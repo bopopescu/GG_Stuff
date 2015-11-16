@@ -1,7 +1,16 @@
-### select multiple shader, strip front and back string
+### select multiple shader, strip front and back string, change first letter to uppercase.
 
 from maya import cmds, mel
 
-selected_obj = cmds.ls(sl = True)
+selected_obj_x1 = cmds.ls(sl = True)
 
-for x in(selected_obj): cmds.rename(x, elem.strip('Front_'+'_Back'))
+for x in(selected_obj_x1):
+	[y.strip('Front_'+'Back') for y in selected_obj_x1]
+	cmds.rename(x, y.strip('Front_'+'_Back'))
+
+selected_obj_x2 = cmds.ls( sl=True )
+
+for x in(selected_obj_x2):
+	cmds.rename(x, x.capitalize())
+
+
