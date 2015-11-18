@@ -1,16 +1,35 @@
+from maya import cmds, mel
+### load vray
+cmds.loadPlugin('vrayformaya', quiet=True)
+
+### autoload vray
+cmds.pluginInfo('vrayformaya', edit=True, autoload=True)
+
+### change render drop down
+cmds.setAttr('defaultRenderGlobals.ren', 'vrayformaya', type='string')
+
+shader = cmds.ls(type = ['blinn','phong'], l = True)
+
+cmds.select(shader)
+
+#mel.eval('source "C:/Users/ym.loong/Documents/maya/2014-x64/scripts/maya2VRay.mel"')
+
+mel.eval('maya2VRay()')
+
 ### select multiple shader, strip front and back string, change first letter to uppercase.
 
-from maya import cmds, mel
-
-selected_obj_x1 = cmds.ls(sl = True)
+selected_obj_x1 = cmds.ls(type = ['VRayMtl'], l = True)
 
 for x in(selected_obj_x1):
-	[y.strip('Front_'+'Back') for y in selected_obj_x1]
-	cmds.rename(x, y.strip('Front_'+'_Back'))
+	[y.strip('KAZ_P_'+'VRAY') for y in selected_obj_x1]
+	cmds.rename(x, y.strip('KAZ_P_'+'VRAY'))
 
 selected_obj_x2 = cmds.ls( sl=True )
 
 for x in(selected_obj_x2):
 	cmds.rename(x, x.capitalize())
-
-
+	
+mel.eval('vrayAddRenderElement rawGiChannel;')
+mel.eval('vrayAddRenderElement rawLightChannel;')
+mel.eval('vrayAddRenderElement rawReflectionChannel;')
+mel.eval('vrayAddRenderElement sampleRateChannel;')
