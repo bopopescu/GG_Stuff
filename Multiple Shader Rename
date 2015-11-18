@@ -12,19 +12,23 @@ shader = cmds.ls(type = ['blinn','phong'], l = True)
 cmds.select(shader)
 mel.eval('maya2VRay()')
 
-### select multiple shader, strip front and back string, change first letter to uppercase.
+### select vray shader, change shader attr, strip front and back letter, change first letter to uppercase.
 selected_obj_x1 = cmds.ls(type = ['VRayMtl'], l = True)
 
+for x in(selected_obj_x1):
+    cmds.setAttr(x+'.reflectionGlossiness', 1)
+    cmds.setAttr(x+'.bumpMult', 1)
+    cmds.setAttr(x+'.diffuseColorAmount', 1)
+    
+    
 for x in(selected_obj_x1):
 	[y.strip('KAZ_P_'+'VRAY') for y in selected_obj_x1]
 	cmds.rename(x, y.strip('KAZ_P_'+'VRAY'))
 
-cmds.select(selected_obj_x1)
-
 for x in(selected_obj_x1):
 	cmds.rename(x, x.capitalize())
 	
-
+### add passes 
 mel.eval('vrayAddRenderElement rawGiChannel;')
 mel.eval('vrayAddRenderElement rawLightChannel;')
 mel.eval('vrayAddRenderElement rawReflectionChannel;')
