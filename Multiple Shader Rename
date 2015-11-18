@@ -39,7 +39,22 @@ mel.eval('setAttr "cameraShape1.vrayCameraPhysicalShutterSpeed" 100;')
 
 ### vraylightdome
 mel.eval('select -r `shadingNode -asLight VRayLightDomeShape`')
-	
+mel.eval('setAttr "VRayLightDomeShape1.useDomeTex" 1;')
+mel.eval('setAttr "VRayLightDomeShape1.intensityMult" 5;')
+mel.eval('setAttr "VRayLightDomeShape1.domeSpherical" 1;')
+cmds.defaultNavigation(createNew=True, destination='VRayLightDomeShape1.domeTex')
+cmds.warning("insert hdri image to dome tex")
+
+### 
+grp = cmds.ls('*GRP*')
+mel.eval('vray objectProperties add_single VRayDisplacement')
+mel.eval('vray addAttributesFromGroup vrayDisplacement vray_opensubdiv 1;')
+mel.eval('setAttr "vrayDisplacement.vrayOsdSubdivDepth" 2;')
+mel.eval('')
+mel.eval('')
+
+
+
 ### add passes 
 mel.eval('vrayAddRenderElement rawGiChannel;')
 mel.eval('vrayAddRenderElement rawLightChannel;')
