@@ -22,8 +22,7 @@ for x in(selected_obj_x1):
     
     
 for x in(selected_obj_x1):
-	[y.strip('KAZ_P_'+'VRAY') for y in selected_obj_x1]
-	cmds.rename(x, y.strip('KAZ_P_'+'VRAY'))
+	cmds.rename(x, x.strip('KAZ_P_'+'VRAY'))
 
 for x in(selected_obj_x1):
 	cmds.rename(x, x.capitalize())
