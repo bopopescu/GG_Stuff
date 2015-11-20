@@ -59,8 +59,6 @@ mel.eval('setAttr "vrayDisplacement.vrayOsdSubdivDepth" 2;')
 mel.eval('')
 mel.eval('')
 
-
-
 ### add passes 
 mel.eval('vrayAddRenderElement rawGiChannel;')
 mel.eval('vrayAddRenderElement rawLightChannel;')
