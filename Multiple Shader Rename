@@ -7,25 +7,32 @@ cmds.pluginInfo('vrayformaya', edit=True, autoload=True)
 cmds.setAttr('defaultRenderGlobals.ren', 'vray', type='string')
 
 ### change to vray shader
-### C:\Users\user_name\Documents\maya\scripts\maya2VRay.mel
 shader = cmds.ls(type = ['blinn','phong'], l = True)
 cmds.select(shader)
 mel.eval('maya2VRay()')
-
-### select vray shader, change shader attr, strip front and back letter, change first letter to uppercase.
-selected_obj_x1 = cmds.ls(type = ['VRayMtl'], l = True)
-
-for x in(selected_obj_x1):
+    
+### select vray shader, change shader attr, strip front and back letter.
+vrayshader = cmds.ls(type = ['VRayMtl'], l = True)  
+for x in(vrayshader):
     cmds.setAttr(x+'.reflectionGlossiness', 1)
     cmds.setAttr(x+'.bumpMult', 1)
     cmds.setAttr(x+'.diffuseColorAmount', 1)
-    
-    
-for x in(selected_obj_x1):
-	cmds.rename(x, x.strip('KAZ_P_'+'VRAY'))
+    cmds.rename(x, x.strip('KAZ_P_'+'VRAY'))
 
-for x in(selected_obj_x1):
-	cmds.rename(x, x.capitalize())
+### change first letter to uppercase. 
+vrayshader = cmds.ls(type = ['VRayMtl'], l = True)       
+for x in(vrayshader):
+    cmds.rename(x, x.capitalize())
+
+### texture input gamma 
+texture_file = cmds.ls(type = ['file'], l = True)
+for x in (texture_file):
+     cmds.vray(x, "addAttributesFromGroup", x, 'vray_file_gamma', 1)
+
+### change bump to linear sRGB
+bump_file = cmds.ls('*bump*',type = ['file'], l = True)
+for x in (bump_file):
+    cmds.setAttr("%s.colorProfile"%(x), 2)
 
 ### camera
 mel.eval('camera -centerOfInterest 5 -focalLength 35 -lensSqueezeRatio 1 -cameraScale 1 -horizontalFilmAperture 1.41732 -horizontalFilmOffset 0 -verticalFilmAperture 0.94488 -verticalFilmOffset 0 -filmFit Fill -overscan 1 -motionBlur 0 -shutterAngle 144 -nearClipPlane 0.1 -farClipPlane 10000 -orthographic 0 -orthographicWidth 30 -panZoomEnabled 0 -horizontalPan 0 -verticalPan 0 -zoom 1; objectMoveCommand; cameraMakeNode 1 "";')
