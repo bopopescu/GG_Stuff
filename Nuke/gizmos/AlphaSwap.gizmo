@@ -1,0 +1,54 @@
+#! C:/Program Files/Nuke8.0v5/nuke-8.0.v5.dll -nx
+version 8.0 v5
+Gizmo {
+ inputs 2
+ tile_color 0xffdd00ff
+ addUserKnob {20 AlphaSwap}
+ addUserKnob {41 preShuffleCopy l "disable preShuffleCopy" T Pre_ShuffleCopy.disable}
+ addUserKnob {20 Version}
+ addUserKnob {26 author l "" +STARTLINE T "v1.0\nbensan / Giggle Garage 2016\nbennosanjaya.com"}
+}
+ Input {
+  inputs 0
+  name Alpha
+  xpos 370
+  ypos 19
+  number 1
+ }
+set Nbfd95bd0 [stack 0]
+push $Nbfd95bd0
+ Input {
+  inputs 0
+  name Beauty
+  xpos 255
+  ypos -85
+ }
+ ShuffleCopy {
+  inputs 2
+  name Pre_ShuffleCopy
+  xpos 255
+  ypos -29
+  disable true
+ }
+ Unpremult {
+  name Unpremult1
+  xpos 255
+  ypos -5
+ }
+ ShuffleCopy {
+  inputs 2
+  name Mid_ShuffleCopy
+  xpos 255
+  ypos 19
+ }
+ Premult {
+  name Premult1
+  xpos 255
+  ypos 43
+ }
+ Output {
+  name Output1
+  xpos 255
+  ypos 103
+ }
+end_group

@@ -1,0 +1,174 @@
+#! C:/Program Files/Nuke8.0v5/nuke-8.0.v5.dll -nx
+version 8.0 v5
+Gizmo {
+ inputs 2
+ tile_color 0xffdd00ff
+ addUserKnob {20 MatteCreator}
+ addUserKnob {20 bodyMatte l "body matte" n 1}
+ addUserKnob {41 RedBody l red T Red_Body_Switch.disable}
+ addUserKnob {41 GreenBody l green -STARTLINE T Green_Body_Switch.disable}
+ addUserKnob {41 BlueBody l blue -STARTLINE T Blue_Body_Switch.disable}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 rgbMatte l "RGB matte" n 1}
+ addUserKnob {41 red T Red_Switch.disable}
+ addUserKnob {41 green -STARTLINE T Green_Switch.disable}
+ addUserKnob {41 blue -STARTLINE T Blue_Switch.disable}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 disableClamp l "disable clamp" T Clamp.disable}
+ addUserKnob {20 Version}
+ addUserKnob {26 author l "" +STARTLINE T "v1.0\nbensan / Giggle Garage 2016\nbennosanjaya.com"}
+}
+ Input {
+  inputs 0
+  name Body_Matte
+  xpos 421
+  ypos -197
+ }
+ Dot {
+  name Dot2
+  xpos 455
+  ypos -151
+ }
+set N132cf7d0 [stack 0]
+ Shuffle {
+  red blue
+  green blue
+  alpha blue
+  name Blue_Body_Shuffle
+  xpos 515
+  ypos -109
+ }
+ Switch {
+  which 1
+  name Blue_Body_Switch
+  xpos 515
+  ypos -45
+  disable true
+ }
+push 0
+push $N132cf7d0
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Red_Body_Shuffle
+  xpos 321
+  ypos -110
+ }
+ Switch {
+  which 1
+  name Red_Body_Switch
+  xpos 321
+  ypos -45
+  disable true
+ }
+push $N132cf7d0
+ Shuffle {
+  red green
+  blue green
+  alpha green
+  name Green_Body_Shuffle
+  xpos 421
+  ypos -110
+ }
+ Switch {
+  which 1
+  name Green_Body_Switch
+  xpos 421
+  ypos -45
+  disable true
+ }
+ Merge2 {
+  inputs 3+1
+  operation plus
+  name BodyMerge
+  xpos 421
+  ypos 52
+ }
+ Input {
+  inputs 0
+  name RGB_Matte
+  xpos 772
+  ypos -192
+  number 1
+ }
+ Dot {
+  name Dot1
+  xpos 806
+  ypos -151
+ }
+set N4a676210 [stack 0]
+ Shuffle {
+  red blue
+  green blue
+  alpha blue
+  name Blue_Shuffle
+  xpos 868
+  ypos -109
+ }
+ Switch {
+  which 1
+  name Blue_Switch
+  xpos 868
+  ypos -40
+  disable true
+ }
+push 0
+push $N4a676210
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Red_Shuffle
+  xpos 686
+  ypos -109
+ }
+ Switch {
+  which 1
+  name Red_Switch
+  xpos 686
+  ypos -40
+  disable true
+ }
+push $N4a676210
+ Shuffle {
+  red green
+  blue green
+  alpha green
+  name Green_Shuffle
+  xpos 772
+  ypos -108
+ }
+ Switch {
+  which 1
+  name Green_Switch
+  xpos 772
+  ypos -40
+  disable true
+ }
+ Merge2 {
+  inputs 3+1
+  operation plus
+  name RGBMerge
+  xpos 772
+  ypos 51
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name FinalMerge
+  xpos 600
+  ypos 143
+ }
+ Clamp {
+  name Clamp
+  xpos 600
+  ypos 176
+ }
+ Output {
+  name Output1
+  xpos 600
+  ypos 243
+ }
+end_group

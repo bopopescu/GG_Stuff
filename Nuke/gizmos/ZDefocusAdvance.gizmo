@@ -1,0 +1,151 @@
+#! C:/Program Files/Nuke8.0v5/nuke-8.0.v5.dll -nx
+version 8.0 v5
+Gizmo {
+ addUserKnob {20 ZDefocus}
+ addUserKnob {41 mask T NoOp1.mask}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 z_channel l "depth channel" T ZDefocus6.z_channel}
+ addUserKnob {41 math T ZDefocus6.math}
+ addUserKnob {41 output T ZDefocus6.output}
+ addUserKnob {41 show_image l "show image" -STARTLINE T ZDefocus6.show_image}
+ addUserKnob {41 center l "focus point (C)" T NoOp1.center}
+ addUserKnob {41 dof l "depth of field" T NoOp1.dof}
+ addUserKnob {41 blur_dof l "blur inside" -STARTLINE T NoOp1.blur_dof}
+ addUserKnob {41 size T NoOp1.size}
+ addUserKnob {41 max_size l maximum T NoOp1.max_size}
+ addUserKnob {26 "" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 325
+  ypos -512
+ }
+ Dot {
+  name Dot24
+  xpos 359
+  ypos -472
+ }
+set N37334b60 [stack 0]
+ Dot {
+  name Dot27
+  xpos 500
+  ypos -472
+ }
+set N37334ed0 [stack 0]
+ ZDefocus2 {
+  math depth
+  output "focal plane setup"
+  show_image false
+  center {{parent.ZDefocus6.center+(0.1*parent.ZDefocus6.center)}}
+  focal_point {485 126}
+  dof 1.200000048
+  blur_dof false
+  size 20
+  max_size 50
+  filter_type bladed
+  blades 8
+  bloom_gamma true
+  bloom true
+  bloom_gain 2.5
+  name ZDefocus3
+  label "\[value filter_type]"
+  xpos 466
+  ypos -368
+ }
+ Shuffle {
+  red green
+  blue green
+  alpha green
+  name Shuffle9
+  xpos 466
+  ypos -320
+ }
+set N373355b0 [stack 0]
+push $N37334ed0
+ ZDefocus2 {
+  math depth
+  center 0.00116361
+  focal_point {485 126}
+  dof {{parent.ZDefocus6.dof-(0.1*parent.ZDefocus6.dof) x123 1.080000043}}
+  blur_dof false
+  size {{parent.ZDefocus6.size+((20/parent.ZDefocus6.size)*0.2*parent.ZDefocus6.size)}}
+  max_size {{parent.ZDefocus6.max_size}}
+  blades 8
+  bloom_gamma true
+  bloom true
+  bloom_gain 2.5
+  name ZDefocus4
+  label "\[value filter_type]"
+  xpos 612
+  ypos -487
+ }
+ Dot {
+  name Dot23
+  xpos 646
+  ypos -294
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Multiply8
+  xpos 466
+  ypos -244
+ }
+push $N37334b60
+ ZDefocus2 {
+  math depth
+  center {{parent.NoOp1.center}}
+  focal_point {485 126}
+  dof {{parent.NoOp1.dof x123 1.200000048}}
+  blur_dof {{parent.NoOp1.blur_dof}}
+  size {{parent.NoOp1.size}}
+  max_size {{parent.NoOp1.max_size}}
+  filter_type bladed
+  blades 8
+  bloom_gamma true
+  bloom true
+  bloom_gain 2.5
+  name ZDefocus6
+  label "\[value filter_type]"
+  xpos 325
+  ypos -392
+ }
+ Merge2 {
+  inputs 2
+  name Merge21
+  xpos 325
+  ypos -175
+  disable {{parent.NoOp1.mask x123 1}}
+ }
+ Output {
+  name Output1
+  xpos 325
+  ypos -75
+ }
+push $N373355b0
+ Viewer {
+  input_process false
+  name Viewer1
+  xpos 325
+  ypos -151
+ }
+ NoOp {
+  inputs 0
+  name NoOp1
+  selected true
+  xpos 129
+  ypos -214
+  addUserKnob {20 ZDefocus}
+  addUserKnob {6 mask +STARTLINE}
+  addUserKnob {16 center l "focus point (C)"}
+  center 0.00116361
+  addUserKnob {16 dof l "depth of field"}
+  dof 1.20000005
+  addUserKnob {6 blur_dof l "blur inside" -STARTLINE}
+  addUserKnob {16 size}
+  size 20
+  addUserKnob {16 max_size l maximum}
+  max_size 50
+ }
+end_group

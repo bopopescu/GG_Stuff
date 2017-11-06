@@ -1,0 +1,291 @@
+#! C:/Program Files/Nuke8.0v5/nuke-8.0.v5.dll -nx
+version 8.0 v5
+Gizmo {
+ inputs 0
+ label "\[value selectPasses]"
+ addUserKnob {20 main l Main}
+ addUserKnob {41 first T NoOp1.first}
+ addUserKnob {41 last -STARTLINE T NoOp1.last}
+ addUserKnob {41 layerName l "Layer Name" T NoOp1.layerName}
+ addUserKnob {4 selectPasses l "Select Passes" M {GI Lighting Reflect Refract Specular SSS Beauty "Minus All" "" ""}}
+ addUserKnob {22 choose l Choose!!! -STARTLINE T "node = nuke.thisNode()\nval = node\['selectPasses'].value()\ngi = nuke.toNode('MergeGI')\nlighting = nuke.toNode('MergeLighting')\nreflect = nuke.toNode('MergeReflect')\nrefract = nuke.toNode('MergeRefract')\nspecular = nuke.toNode('MergeSpecular')\nsss = nuke.toNode('MergeSSS')\n\nif val == 'GI':\n    gi.knob('disable').setValue(1)\n    lighting.knob('disable').setValue(0)\n    reflect.knob('disable').setValue(0)\n    refract.knob('disable').setValue(0)\n    specular.knob('disable').setValue(0)\n    sss.knob('disable').setValue(0)\nif val == 'Lighting':\n    gi.knob('disable').setValue(0)\n    lighting.knob('disable').setValue(1)\n    reflect.knob('disable').setValue(0)\n    refract.knob('disable').setValue(0)\n    specular.knob('disable').setValue(0)\n    sss.knob('disable').setValue(0)\nif val == 'Reflect':\n    gi.knob('disable').setValue(0)\n    lighting.knob('disable').setValue(0)\n    reflect.knob('disable').setValue(1)\n    refract.knob('disable').setValue(0)\n    specular.knob('disable').setValue(0)\n    sss.knob('disable').setValue(0)\nif val == 'Refract':\n    gi.knob('disable').setValue(0)\n    lighting.knob('disable').setValue(0)\n    reflect.knob('disable').setValue(0)\n    refract.knob('disable').setValue(1)\n    specular.knob('disable').setValue(0)\n    sss.knob('disable').setValue(0)\nif val == 'Specular':\n    gi.knob('disable').setValue(0)\n    lighting.knob('disable').setValue(0)\n    reflect.knob('disable').setValue(0)\n    refract.knob('disable').setValue(0)\n    specular.knob('disable').setValue(1)\n    sss.knob('disable').setValue(0)\nif val == 'SSS':\n    gi.knob('disable').setValue(0)\n    lighting.knob('disable').setValue(0)\n    reflect.knob('disable').setValue(0)\n    refract.knob('disable').setValue(0)\n    specular.knob('disable').setValue(0)\n    sss.knob('disable').setValue(1)\nif val == 'Beauty':\n    gi.knob('disable').setValue(1)\n    lighting.knob('disable').setValue(1)\n    reflect.knob('disable').setValue(1)\n    refract.knob('disable').setValue(1)\n    specular.knob('disable').setValue(1)\n    sss.knob('disable').setValue(1)\nif val == 'Minus All':\n    gi.knob('disable').setValue(0)\n    lighting.knob('disable').setValue(0)\n    reflect.knob('disable').setValue(0)\n    refract.knob('disable').setValue(0)\n    specular.knob('disable').setValue(0)\n    sss.knob('disable').setValue(0)"}
+}
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].SSS.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read1
+  xpos -479
+  ypos -406
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].specular.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read12
+  xpos -405
+  ypos -499
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].refract.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read11
+  xpos -320
+  ypos -597
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].reflect.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read10
+  xpos -235
+  ypos -695
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].SSS.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read4
+  xpos -769
+  ypos -798
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].specular.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read5
+  xpos -695
+  ypos -891
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].refract.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read6
+  xpos -610
+  ypos -989
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].reflect.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read7
+  xpos -525
+  ypos -1087
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].GI.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read13
+  xpos -357
+  ypos -1181
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 3
+  name Read14
+  xpos -210
+  ypos -1281
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  Achannels rgb
+  name MergeGI1
+  xpos -210
+  ypos -1151
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeReflect1
+  xpos -210
+  ypos -1057
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeRefract1
+  xpos -210
+  ypos -959
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeSpecular1
+  xpos -210
+  ypos -861
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeSSS1
+  xpos -210
+  ypos -768
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].GI.####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 2
+  name Read3
+  xpos -67
+  ypos -898
+ }
+ Read {
+  inputs 0
+  file "\[value CMLPath.ShotOutput]\[value NoOp1.layerName]/\[value NoOp1.layerName].####.exr"
+  format "1280 720 0 0 1280 720 1 The Kazoops"
+  first {{parent.NoOp1.first}}
+  last {{parent.NoOp1.last}}
+  origfirst {{parent.NoOp1.first}}
+  origlast {{parent.NoOp1.last}}
+  origset true
+  on_error "nearest frame"
+  version 3
+  name Read2
+  xpos 80
+  ypos -998
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  Achannels rgb
+  name MergeGI
+  xpos 80
+  ypos -868
+  disable true
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeLighting
+  xpos 80
+  ypos -768
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeReflect
+  xpos 80
+  ypos -665
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeRefract
+  xpos 80
+  ypos -567
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeSpecular
+  xpos 80
+  ypos -469
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name MergeSSS
+  xpos 80
+  ypos -376
+ }
+ Output {
+  name Output1
+  xpos 80
+  ypos -304
+ }
+ NoOp {
+  inputs 0
+  name NoOp1
+  xpos 631
+  ypos -1238
+  addUserKnob {20 User}
+  addUserKnob {3 first}
+  first 100
+  addUserKnob {3 last -STARTLINE}
+  last 250
+  addUserKnob {1 layerName l "Layer Name"}
+  layerName ActorLayer
+ }
+end_group
