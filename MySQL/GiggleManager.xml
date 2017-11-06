@@ -1,0 +1,20 @@
+<data>
+	<headerFilter>
+		<headerFilter_ID>True</headerFilter_ID>
+		<headerFilter_ID_History>True</headerFilter_ID_History>
+		<headerFilter_Shot>True</headerFilter_Shot>
+		<headerFilter_Date>True</headerFilter_Date>
+		<headerFilter_Time>True</headerFilter_Time>
+		<headerFilter_Start_Frame>True</headerFilter_Start_Frame>
+		<headerFilter_End_Frame>dastingo</headerFilter_End_Frame>
+		<headerFilter_Artist>dastingo</headerFilter_Artist>
+		<headerFilter_Mastershot>dastingo</headerFilter_Mastershot>
+		<headerFilter_Status>dastingo</headerFilter_Status>
+		<headerFilter_Error_Notes>dastingo</headerFilter_Error_Notes>
+	</headerFilter>
+	<rankingSystem>
+		<rankingSystem_high>ym.loong, benno.sanjaya</rankingSystem_high>
+		<rankingSystem_medium>None</rankingSystem_medium>
+		<rankingSystem_low>None</rankingSystem_low>
+	</rankingSystem>
+</data>
