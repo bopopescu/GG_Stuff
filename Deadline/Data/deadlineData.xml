@@ -1,0 +1,13 @@
+<data>
+	<settings>
+		<dept></dept>
+		<grp>cml_blade</grp>
+		<pool>show_cml</pool>
+		<s_pool>show_cml</s_pool>
+		<prio>58</prio>
+		<fpt>2</fpt>
+		<threads>24</threads>
+		<initialStatus>Suspended</initialStatus>
+		<frame>FF</frame>
+	</settings>
+</data>
