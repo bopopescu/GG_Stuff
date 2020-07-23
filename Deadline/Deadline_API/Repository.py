@@ -19,14 +19,14 @@ class Repository:
         
         return self.connectionProperties.__post__('/api/repository', body)
         
-    def AddSlaveHistoryEntry(self, slaveName, entry):
-        """ Adds the provided entry for the slave name provided.
-            Input:  slave name (string)
+    def AddSubordinateHistoryEntry(self, subordinateName, entry):
+        """ Adds the provided entry for the subordinate name provided.
+            Input:  subordinate name (string)
                     entry (string)
             Returns: Success if successful
         """
     
-        body = '{"Command":"slavehistoryentry","SlaveName":"'+slaveName+'","Entry":"'+entry+'"}'
+        body = '{"Command":"subordinatehistoryentry","SubordinateName":"'+subordinateName+'","Entry":"'+entry+'"}'
         
         return self.connectionProperties.__post__('/api/repository', body)
         

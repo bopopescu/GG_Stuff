@@ -43,9 +43,9 @@ class NukePanel(QWidget):
         self.layout.addWidget(self.openSelectedBtn)
         self.layout.addWidget(self.changeWrite)
 
-        self.masterLayout = QVBoxLayout()
-        self.masterLayout.addLayout(self.hLayout)
-        self.masterLayout.addLayout(self.layout)
+        self.mainLayout = QVBoxLayout()
+        self.mainLayout.addLayout(self.hLayout)
+        self.mainLayout.addLayout(self.layout)
 
         self.openSelectedBtn.clicked.connect(self.openSelectedNukescripts)
         self.searchLine.textChanged.connect(self.getNukescripts)
@@ -56,7 +56,7 @@ class NukePanel(QWidget):
         # self.setWindowTitle("Nuke Manager --- %s %s" % (self.first, self.last))
         self.setFixedSize(400, 500)
 
-        self.setLayout(self.masterLayout)
+        self.setLayout(self.mainLayout)
         
     def writeNode(self):
         old = nuke.toNode('WriteMov_DNXHR')

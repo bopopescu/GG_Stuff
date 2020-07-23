@@ -120,7 +120,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		self.horizontalLayout_artist = qg.QHBoxLayout()
 		self.horizontalLayout_startFrame = qg.QHBoxLayout()		
 		self.horizontalLayout_endFrame = qg.QHBoxLayout()		
-		self.horizontalLayout_mastershot = qg.QHBoxLayout()
+		self.horizontalLayout_mainshot = qg.QHBoxLayout()
 		self.horizontalLayout_status = qg.QHBoxLayout()
 
 		self.toolButton_id = qg.QToolButton()
@@ -131,18 +131,18 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		self.toolButton_artist = qg.QToolButton()
 		self.toolButton_startFrame = qg.QToolButton()	
 		self.toolButton_endFrame = qg.QToolButton()	
-		self.toolButton_mastershot = qg.QToolButton()
+		self.toolButton_mainshot = qg.QToolButton()
 		self.toolButton_status = qg.QToolButton()
 		
 		expanded_toolButton_list = [self.toolButton_id, self.toolButton_id_history, self.toolButton_shot,
 		self.toolButton_date, self.toolButton_time, self.toolButton_artist, self.toolButton_startFrame,
-		self.toolButton_endFrame, self.toolButton_mastershot, self.toolButton_status]
+		self.toolButton_endFrame, self.toolButton_mainshot, self.toolButton_status]
 		for expanded_toolButton in expanded_toolButton_list:
 			expanded_toolButton.setText("+")
 
 		disabled_toolButton_list = [self.toolButton_id, self.toolButton_id_history, self.toolButton_shot,
 		self.toolButton_date, self.toolButton_time, self.toolButton_artist, self.toolButton_startFrame, 
-		self.toolButton_endFrame, self.toolButton_mastershot, self.toolButton_status]
+		self.toolButton_endFrame, self.toolButton_mainshot, self.toolButton_status]
 		for disabled_toolButton in disabled_toolButton_list:
 			disabled_toolButton.setEnabled(False)
 				
@@ -156,7 +156,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		self.checkBox_startFrame = qg.QCheckBox("Start_Frame")
 		self.checkBox_endFrame = qg.QCheckBox("End_Frame")
 		self.checkBox_artist = qg.QCheckBox("Artist")
-		self.checkBox_mastershot = qg.QCheckBox("Mastershot")
+		self.checkBox_mainshot = qg.QCheckBox("Mainshot")
 		self.checkBox_status = qg.QCheckBox("Status")
 
 		self.horizontalLayout_id.addWidget(self.checkBox_id)
@@ -175,8 +175,8 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		self.horizontalLayout_startFrame.addWidget(self.toolButton_startFrame)
 		self.horizontalLayout_endFrame.addWidget(self.checkBox_endFrame)											
 		self.horizontalLayout_endFrame.addWidget(self.toolButton_endFrame)		
-		self.horizontalLayout_mastershot.addWidget(self.checkBox_mastershot)
-		self.horizontalLayout_mastershot.addWidget(self.toolButton_mastershot)
+		self.horizontalLayout_mainshot.addWidget(self.checkBox_mainshot)
+		self.horizontalLayout_mainshot.addWidget(self.toolButton_mainshot)
 		self.horizontalLayout_status.addWidget(self.checkBox_status)
 		self.horizontalLayout_status.addWidget(self.toolButton_status)
 		
@@ -188,7 +188,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		fl.addLayout(self.horizontalLayout_artist)	
 		fl.addLayout(self.horizontalLayout_startFrame)	
 		fl.addLayout(self.horizontalLayout_endFrame)	
-		fl.addLayout(self.horizontalLayout_mastershot)
+		fl.addLayout(self.horizontalLayout_mainshot)
 		fl.addLayout(self.horizontalLayout_status)
 
 		self.listWidget_bodyFilter = qg.QListWidget()
@@ -210,7 +210,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		self.pushButton_refliter.clicked.connect(self.updateTable)
 		self.toolButton_godMode.clicked.connect(self.myDatabaseExpanded)	
 		self.checkBox_artist.toggled.connect(self.setEnabled_artist)
-		self.checkBox_mastershot.toggled.connect(self.setEnabled_mastershot)
+		self.checkBox_mainshot.toggled.connect(self.setEnabled_mainshot)
 		self.checkBox_status.toggled.connect(self.setEnabled_status)
 		self.toolButton_status.clicked.connect(self.statusFilter)
 #-----------------------------------------------------------------------------------------------------------------#
@@ -238,11 +238,11 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		else:
 			self.toolButton_artist.setEnabled(False)
 
-	def setEnabled_mastershot(self):
-		if self.checkBox_mastershot.isChecked():
-			self.toolButton_mastershot.setEnabled(True)
+	def setEnabled_mainshot(self):
+		if self.checkBox_mainshot.isChecked():
+			self.toolButton_mainshot.setEnabled(True)
 		else:
-			self.toolButton_mastershot.setEnabled(False)
+			self.toolButton_mainshot.setEnabled(False)
 
 	def setEnabled_status(self):
 		if self.checkBox_status.isChecked():
@@ -453,7 +453,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 						self.tableWidget_data.setItem(row, column, qg.QTableWidgetItem(str(table_endFrame)))
 					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Artist":
 						self.tableWidget_data.setItem(row, column, qg.QTableWidgetItem(str(newArtist)))			
-					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Mastershot":				
+					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Mainshot":				
 						comboBox = CustomComboBox()
 						#comboBox.setSizeAdjustPolicy(comboBox.AdjustToContents)						
 						comboBox.addItem(qc.QString(""))					
@@ -477,7 +477,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		artist_updateCheckBox = updateTable.updateCheckBox('headerFilter_Artist', self.checkBox_artist)
 		startFrame_updateCheckBox = updateTable.updateCheckBox('headerFilter_Start_Frame', self.checkBox_startFrame)
 		endFrame_updateCheckBox = updateTable.updateCheckBox('headerFilter_End_Frame', self.checkBox_endFrame)
-		mastershot_updateCheckBox = updateTable.updateCheckBox('headerFilter_Mastershot', self.checkBox_mastershot)
+		mainshot_updateCheckBox = updateTable.updateCheckBox('headerFilter_Mainshot', self.checkBox_mainshot)
 		status_updateCheckBox = updateTable.updateCheckBox('headerFilter_Status', self.checkBox_status)
 
 	def updateTable(self):	 
@@ -488,10 +488,10 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		else:
 			self.toolButton_artist.setEnabled(False)
 
-		if self.checkBox_mastershot.isChecked():
-			self.toolButton_mastershot.setEnabled(True)
+		if self.checkBox_mainshot.isChecked():
+			self.toolButton_mainshot.setEnabled(True)
 		else:
-			self.toolButton_mastershot.setEnabled(False)
+			self.toolButton_mainshot.setEnabled(False)
 
 		if self.checkBox_status.isChecked():
 			self.toolButton_status.setEnabled(True)
@@ -506,15 +506,15 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 		artist_updateHeaderItem = updateTable.updateHeaderItem(self.checkBox_artist, "Artist", 'headerFilter_Artist')		
 		startFrame_updateHeaderItem = updateTable.updateHeaderItem(self.checkBox_startFrame, "Start_Frame", 'headerFilter_Start_Frame')
 		endFrame_updateHeaderItem = updateTable.updateHeaderItem(self.checkBox_endFrame, "End_Frame", 'headerFilter_End_Frame')
-		mastershot_updateHeaderItem = updateTable.updateHeaderItem(self.checkBox_mastershot, "Mastershot", 'headerFilter_Mastershot')
+		mainshot_updateHeaderItem = updateTable.updateHeaderItem(self.checkBox_mainshot, "Mainshot", 'headerFilter_Mainshot')
 		status_updateHeaderItem = updateTable.updateHeaderItem(self.checkBox_status, "Status", 'headerFilter_Status')
 		tree.write(giggleManager_fullPath)
 		#[0] == count, [1] == label name	
 		horizontalHeaderCount = (id_updateHeaderItem[0] + idHistory_updateHeaderItem[0] + shot_updateHeaderItem[0] + date_updateHeaderItem[0] + time_updateHeaderItem[0] +\
-								artist_updateHeaderItem[0] + startFrame_updateHeaderItem[0] + endFrame_updateHeaderItem[0] + mastershot_updateHeaderItem[0] +\
+								artist_updateHeaderItem[0] + startFrame_updateHeaderItem[0] + endFrame_updateHeaderItem[0] + mainshot_updateHeaderItem[0] +\
 								status_updateHeaderItem[0])
 		horizontalHeaderLabel = [id_updateHeaderItem[1], idHistory_updateHeaderItem[1], shot_updateHeaderItem[1], date_updateHeaderItem[1], time_updateHeaderItem[1], \
-								artist_updateHeaderItem[1], startFrame_updateHeaderItem[1], endFrame_updateHeaderItem[1], mastershot_updateHeaderItem[1], \
+								artist_updateHeaderItem[1], startFrame_updateHeaderItem[1], endFrame_updateHeaderItem[1], mainshot_updateHeaderItem[1], \
 								status_updateHeaderItem[1]]
 		columns = self.DB.GetColumns()
 		rows = self.DB.GetTable()
@@ -563,7 +563,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 							self.tableWidget_data.setItem(row, column, qg.QTableWidgetItem(str(rows[row][6])))
 						elif self.checkBox_endFrame.isChecked() and self.tableWidget_data.horizontalHeaderItem(column).text() == "End_Frame":
 							self.tableWidget_data.setItem(row, column, qg.QTableWidgetItem(str(rows[row][7])))
-						elif self.checkBox_mastershot.isChecked() and self.tableWidget_data.horizontalHeaderItem(column).text() == "Mastershot":
+						elif self.checkBox_mainshot.isChecked() and self.tableWidget_data.horizontalHeaderItem(column).text() == "Mainshot":
 							comboBox = CustomComboBox()					
 							comboBox.addItem(qc.QString(""))					
 							comboBox.addItem(qg.QIcon("A:/Ticklers/Chameleon/MySQL/icon/correct.png"), qc.QString("                 YES"))
@@ -603,7 +603,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 							self.tableWidget_data.setItem(row, column, qg.QTableWidgetItem(str(rows[row][6])))
 						elif self.checkBox_endFrame.isChecked() and self.tableWidget_data.horizontalHeaderItem(column).text() == "End_Frame":
 							self.tableWidget_data.setItem(row, column, qg.QTableWidgetItem(str(rows[row][7])))
-						elif self.checkBox_mastershot.isChecked() and self.tableWidget_data.horizontalHeaderItem(column).text() == "Mastershot":
+						elif self.checkBox_mainshot.isChecked() and self.tableWidget_data.horizontalHeaderItem(column).text() == "Mainshot":
 							comboBox = CustomComboBox()					
 							comboBox.addItem(qc.QString(""))					
 							comboBox.addItem(qg.QIcon("A:/Ticklers/Chameleon/MySQL/icon/correct.png"), qc.QString("                 YES"))
@@ -625,7 +625,7 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 					
 	def saveTable(self):
 		# [0] = id, [1] = id_history, [2] = shot, [3] = date, [4] = time, [5] = artist_name
-		# [6] = start_frame, [7] = end_frame, [8] = mastershot, [9] = status
+		# [6] = start_frame, [7] = end_frame, [8] = mainshot, [9] = status
 		columns = self.DB.GetColumns()
 		tables = self.DB.GetTable()
 		if tables == []:
@@ -641,21 +641,21 @@ class MyDatabase(baseClass_md, objsClass_md, qg.QWidget):
 						startFrame = self.tableWidget_data.item(row,column).text() 
 					if self.tableWidget_data.horizontalHeaderItem(column).text() == "End_Frame":
 						endFrame = self.tableWidget_data.item(row,column).text()    
-					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Mastershot":
-						mastershot = self.tableWidget_data.cellWidget(row,column).currentIndex() 
+					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Mainshot":
+						mainshot = self.tableWidget_data.cellWidget(row,column).currentIndex() 
 					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Status":
 						status = self.tableWidget_data.item(row,column).text()
 						errorNotes = None  				    				    				     				
-						self.DB.AddEntryToTable(int(idHistory), shots, int(startFrame), int(endFrame), int(mastershot), status, errorNotes)
+						self.DB.AddEntryToTable(int(idHistory), shots, int(startFrame), int(endFrame), int(mainshot), status, errorNotes)
 		else:
 			rowCount = self.tableWidget_data.rowCount()
 			columnCount = self.tableWidget_data.columnCount()
 			modifiedRow_list = [] 
 			for row in range(rowCount):
 				for column in range(columnCount):
-					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Mastershot" and self.tableWidget_data.cellWidget(row,column).currentIndex() != tables[row][8]:
-						mastershot = self.tableWidget_data.cellWidget(row,column).currentIndex()
-						self.DB.UpdateEntryToTable_mastershot(mastershot, row+1)
+					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Mainshot" and self.tableWidget_data.cellWidget(row,column).currentIndex() != tables[row][8]:
+						mainshot = self.tableWidget_data.cellWidget(row,column).currentIndex()
+						self.DB.UpdateEntryToTable_mainshot(mainshot, row+1)
 					if self.tableWidget_data.horizontalHeaderItem(column).text() == "Status" and self.tableWidget_data.item(row,column).text() != tables[row][9]:
 						status = self.tableWidget_data.item(row,column).text()
 						self.DB.UpdateEntryToTable_status(status, row+1)

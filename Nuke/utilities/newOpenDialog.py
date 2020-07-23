@@ -84,12 +84,12 @@ class NukePanel(QWidget):
 
         # *********************************************************************************
 
-        self.masterLayout = QVBoxLayout()
-        self.masterLayout.addLayout(self.hLayout1)
-        self.masterLayout.addLayout(self.vLayout2)
-        self.masterLayout.addLayout(self.vLayout1)
+        self.mainLayout = QVBoxLayout()
+        self.mainLayout.addLayout(self.hLayout1)
+        self.mainLayout.addLayout(self.vLayout2)
+        self.mainLayout.addLayout(self.vLayout1)
 
-        self.setLayout(self.masterLayout)
+        self.setLayout(self.mainLayout)
 
         self.setFixedSize(700, 800)
 

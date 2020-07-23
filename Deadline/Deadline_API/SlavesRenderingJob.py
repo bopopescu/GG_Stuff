@@ -1,18 +1,18 @@
 from ConnectionProperty import ConnectionProperty
 
-class SlavesRenderingJob:
+class SubordinatesRenderingJob:
     """
-        Class used by DeadlineCon to send Slaves Rendering Job requests. 
+        Class used by DeadlineCon to send Subordinates Rendering Job requests. 
         Stores the address of the web service for use in sending requests.
     """
     def __init__(self, connectionProperties):
         self.connectionProperties = connectionProperties
         
-    def GetSlavesRenderingJob(self, id, getIpAddress=False):
-        """    Gets the list of slaves that are currently rendering a job.
+    def GetSubordinatesRenderingJob(self, id, getIpAddress=False):
+        """    Gets the list of subordinates that are currently rendering a job.
             Input:  id: The job ID.
-                getIpAddress: If True, the IP address of the slaves will be returned instead
-            Returns: The list of slave names, or the list of slave IP addresses if getIpAddress is True
+                getIpAddress: If True, the IP address of the subordinates will be returned instead
+            Returns: The list of subordinate names, or the list of subordinate IP addresses if getIpAddress is True
         """
         
-        return self.connectionProperties.__get__("/api/slavesrenderingjob?JobID="+id+"&GetIpAddress="+str(getIpAddress))
+        return self.connectionProperties.__get__("/api/subordinatesrenderingjob?JobID="+id+"&GetIpAddress="+str(getIpAddress))

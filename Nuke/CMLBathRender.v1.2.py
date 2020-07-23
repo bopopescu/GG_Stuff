@@ -43,9 +43,9 @@ class Panel(QWidget):
         self.layout.addWidget(self.renderPNG)
         self.layout.addWidget(self.renderMov)
 
-        self.masterLayout = QVBoxLayout()
-        self.masterLayout.addLayout(self.hLayout)
-        self.masterLayout.addLayout(self.layout)
+        self.mainLayout = QVBoxLayout()
+        self.mainLayout.addLayout(self.hLayout)
+        self.mainLayout.addLayout(self.layout)
 
         self.renderPNG.clicked.connect(self.renderSequenceNukescripts)
         self.renderMov.clicked.connect(self.renderDNXHRNukescripts)
@@ -55,7 +55,7 @@ class Panel(QWidget):
         self.setWindowTitle("Nuke Manager v1.2")
         self.setFixedSize(400, 500)
 
-        self.setLayout(self.masterLayout)
+        self.setLayout(self.mainLayout)
 
     def renderSequenceNukescripts(self):
         currents = self.listWidget.selectedItems()

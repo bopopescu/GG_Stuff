@@ -42,14 +42,14 @@ class LimitGroups:
             
         return self.connectionProperties.__get__(script)
 
-    def SetLimitGroup(self, name, limit=None, slaveList=None, WhitelistFlag=None, progress = None, excludedSlaves = None):
+    def SetLimitGroup(self, name, limit=None, subordinateList=None, WhitelistFlag=None, progress = None, excludedSubordinates = None):
         """ Creates a limit group if it doesn't exist, or updates its properties if it does.
             Input:    name: The limit group name.
                     limt: The limit.
-                    listedSlaves: The list of slaves.
-                    isWhiteList: True if the list of slaves is a whitelist.
+                    listedSubordinates: The list of subordinates.
+                    isWhiteList: True if the list of subordinates is a whitelist.
                     progress: The release percentage.
-                    excludedSlaves: The list of slaves that will ignore this limit group.
+                    excludedSubordinates: The list of subordinates that will ignore this limit group.
             Returns: Success message
         """
  
@@ -67,13 +67,13 @@ class LimitGroups:
                 
             body = body + ',"RelPer":'+str(progress)
         
-        if slaveList != None:
+        if subordinateList != None:
             
-            body = body + ',"Slaves":'+json.dumps(slaveList)
+            body = body + ',"Subordinates":'+json.dumps(subordinateList)
             
-        if excludedSlaves != None:
+        if excludedSubordinates != None:
             
-            body = body + ',"SlavesEx":'+json.dumps(excludedSlaves)
+            body = body + ',"SubordinatesEx":'+json.dumps(excludedSubordinates)
             
         body = body +'}'
 

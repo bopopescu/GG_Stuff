@@ -48,7 +48,7 @@ class DatabaseUtility:
 			" `Artist` char(20) NOT NULL,"			
 			" `Start_Frame` int(5) NULL,"
 			" `End_Frame` int(5) NULL,"
-			" `Mastershot` tinyint NOT NULL,"
+			" `Mainshot` tinyint NOT NULL,"
 			" `Status` char(50) NOT NULL,"
 			" `Error_Notes` char(100) NOT NULL,"
 			" PRIMARY KEY (`ID`)"
@@ -61,7 +61,7 @@ class DatabaseUtility:
 			self.RunCommand(cmd)
 		
 	def CreateTrigger(self):	
-		cmd = (" CREATE TRIGGER lighting_BEFORE_UPDATE BEFORE UPDATE ON lighting FOR EACH ROW INSERT INTO lighting_history VALUES (ID, OLD.ID_History, OLD.Shot, OLD.Date, OLD.Time, OLD.Artist, OLD.Start_Frame, OLD.End_Frame, OLD.Mastershot, OLD.Status, OLD.Error_Notes) ");
+		cmd = (" CREATE TRIGGER lighting_BEFORE_UPDATE BEFORE UPDATE ON lighting FOR EACH ROW INSERT INTO lighting_history VALUES (ID, OLD.ID_History, OLD.Shot, OLD.Date, OLD.Time, OLD.Artist, OLD.Start_Frame, OLD.End_Frame, OLD.Mainshot, OLD.Status, OLD.Error_Notes) ");
 		
 		self.RunCommand(cmd)
 	def GetTable(self):
@@ -84,11 +84,11 @@ class DatabaseUtility:
 			msg = self.cursor.fetchone()
 		return msg
 		
-	def AddEntryToTable(self, ID, Shot, Artist, Start_Frame, End_Frame, Mastershot, Status, Error_Notes):
+	def AddEntryToTable(self, ID, Shot, Artist, Start_Frame, End_Frame, Mainshot, Status, Error_Notes):
 		DateVar = datetime.now().strftime("%y-%m-%d")
 		TimeVar = datetime.now().strftime("%H:%M:%S")
 		
-		cmd_1 = "INSERT INTO lighting (ID_History, Shot, Date, Time, Artist, Start_Frame, End_Frame, Mastershot, Status, Error_Notes) VALUES ('%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s')" %(ID, Shot, DateVar, TimeVar, Artist, Start_Frame, End_Frame, Mastershot, Status, Error_Notes)
+		cmd_1 = "INSERT INTO lighting (ID_History, Shot, Date, Time, Artist, Start_Frame, End_Frame, Mainshot, Status, Error_Notes) VALUES ('%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s')" %(ID, Shot, DateVar, TimeVar, Artist, Start_Frame, End_Frame, Mainshot, Status, Error_Notes)
 
 		
 		#cmd = " INSERT INTO " + self.tableName + " (Shot, Date, Time, Artist, Status)"
@@ -109,8 +109,8 @@ class DatabaseUtility:
 		
 		self.RunCommand(cmd)
 		
-	def UpdateEntryToTable_mastershot(self, Mastershot, ID):
-		cmd = "UPDATE lighting SET Mastershot = ('%d') WHERE ID=(%d)" %(Mastershot, ID)
+	def UpdateEntryToTable_mainshot(self, Mainshot, ID):
+		cmd = "UPDATE lighting SET Mainshot = ('%d') WHERE ID=(%d)" %(Mainshot, ID)
 		
 		self.RunCommand(cmd)
 		
